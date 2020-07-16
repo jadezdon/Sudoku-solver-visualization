@@ -1,10 +1,23 @@
+//* constants for styling
+const CELL_SIZE = 70;
+const CELL_GAP = 10;
+const CELL_COLOR = {
+    FIXED: '#D5D8DC',
+    EMPTY: '#FDFEFE',
+    FINAL: '#82CA9D',
+
+    DONE: '#FFF79A',
+    WRONG: '#F7977A'
+};
+const TEXT_COLOR = '#17202A';
+
 const CELL_NUM = 9;
-const CELL_SIZE = 80;
 const EMPTYVALUE = 0;
 
 let canvas;
 let btnSolve;
 
+let colors = [...Array(CELL_NUM)].map(x => Array(CELL_NUM).fill(0));
 let puzzle = [
     [0, 0, 2, 0, 0, 0, 5, 0, 0],
     [0, 1, 0, 7, 0, 5, 0, 2, 0],
@@ -17,8 +30,9 @@ let puzzle = [
     [0, 0, 7, 0, 0, 0, 8, 0, 0]
 ];
 
+
 function setup() {
-    canvas = createCanvas(800, 800);
+    canvas = createCanvas(CELL_NUM * (CELL_SIZE + CELL_GAP), CELL_NUM * (CELL_SIZE + CELL_GAP));
     canvas.parent('game-area');
 
     textSize(30);
@@ -26,20 +40,45 @@ function setup() {
 
     btnSolve = createButton('Solve');
     btnSolve.parent('controls-area');
-    btnSolve.mousePressed(solveSudoku);
+    btnSolve.mousePressed(btnSolvePressed);
 
     noLoop();
+
+    for (let row = 0; row < CELL_NUM; row++) {
+        for (let col = 0; col < CELL_NUM; col++) {
+            if (puzzle[row][col] !== EMPTYVALUE) {
+                colors[row][col] = CELL_COLOR.FIXED;
+            } else {
+                colors[row][col] = CELL_COLOR.EMPTY;
+            }
+        }
+    }
 }
 
 function draw() {
-    // background(220);
     for (let row = 0; row < CELL_NUM; row++) {
         for (let col = 0; col < CELL_NUM; col++) {
-            rect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            fill(colors[row][col]);
+            strokeWeight(0.1);
+            rect(col * (CELL_SIZE + CELL_GAP), row * (CELL_SIZE + CELL_GAP), CELL_SIZE, CELL_SIZE, 20);
             if (puzzle[row][col] !== EMPTYVALUE) {
-                text(puzzle[row][col], col * CELL_SIZE + CELL_SIZE / 2, row * CELL_SIZE + CELL_SIZE / 2);
+                fill(TEXT_COLOR);
+                text(puzzle[row][col], col * (CELL_SIZE + CELL_GAP) + CELL_SIZE / 2, row * (CELL_SIZE + CELL_GAP) + CELL_SIZE / 2);
             }
         }
+    }
+}
+
+function btnSolvePressed() {
+    if (solveSudoku()) {
+        for (let row = 0; row < CELL_NUM; row++) {
+            for (let col = 0; col < CELL_NUM; col++) {
+                if (colors[row][col] !== CELL_COLOR.FIXED) {
+                    colors[row][col] = CELL_COLOR.FINAL;
+                }
+            }
+        }
+        redraw();
     }
 }
 
@@ -52,10 +91,12 @@ async function solveSudoku() {
         if (puzzle[row][col] === EMPTYVALUE) {
             for (let value = 1; value <= CELL_NUM; value++) {
                 if (isValidCell(row, col, value)) {
-                    puzzle[row][col] = value;
 
-                    await sleep(50);
+                    puzzle[row][col] = value;
+                    colors[row][col] = CELL_COLOR.DONE;
+
                     redraw();
+                    await sleep(10);
 
                     if (!hasEmptyCell()) {
                         return true;
@@ -70,7 +111,17 @@ async function solveSudoku() {
             break;
         }
     }
+    
+    colors[row][col] = CELL_COLOR.WRONG;
+
+    redraw();
+    await sleep(10);
+    
     puzzle[row][col] = EMPTYVALUE;
+    colors[row][col] = CELL_COLOR.EMPTY;
+
+    redraw();
+    await sleep(10);
 }
 
 function sleep(ms) {
