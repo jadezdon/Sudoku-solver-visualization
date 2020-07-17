@@ -1,13 +1,13 @@
 #game-area {
     display: grid;
-    grid-template-columns: repeat(9, 70px);
-    grid-template-rows: repeat(9, 70px);
-    gap: 10px 10px;
+    grid-template-columns: repeat(9, 60px);
+    grid-template-rows: repeat(9, 60px);
+    gap: 5px 5px;
 }
 
 .cell {
     border: 1px solid black;
     text-align: center;
-    line-height: 70px;
-    font-size: 30px;
+    line-height: 60px;
+    font-size: 24px;
 }

@@ -8,11 +8,10 @@ const CELL_STATES = {
 
 const CELL_NUM = 9;
 const EMPTYVALUE = 0;
-
 const CELL_SIZE = 70;
 
-let speed = 10;
-
+let speed = 5;
+let isSolved = false;
 let puzzle = [...Array(CELL_NUM)].map((x) => Array(CELL_NUM));
 
 class Cell {
@@ -82,9 +81,10 @@ function init() {
                 puzzleValues[r][c] === 0 ? CELL_STATES.EMPTY : CELL_STATES.FIXED
             );
 
-            let div = $("<div id=cell" + r + c + "></div>");
+            let div = $("<div id=" + r + c + "></div>");
             div.addClass("cell");
             div.text(puzzle[r][c].value === 0 ? "" : puzzle[r][c].value);
+            div.css("background-color", puzzle[r][c].color);
             $("#game-area").append(div);
         }
     }
@@ -102,10 +102,12 @@ async function solveSudoku() {
                     puzzle[row][col].value = value;
                     puzzle[row][col].state = CELL_STATES.DONE;
 
-                    update();
+                    updateScreen();
                     await sleep(speed);
 
                     if (!hasEmptyCell()) {
+                        isSolved = true;
+                        updateScreen();
                         return true;
                     } else {
                         if (await solveSudoku()) {
@@ -121,22 +123,25 @@ async function solveSudoku() {
 
     puzzle[row][col].state = CELL_STATES.WRONG;
 
-    update();
+    updateScreen();
     await sleep(speed);
 
     puzzle[row][col].value = EMPTYVALUE;
     puzzle[row][col].state = CELL_STATES.EMPTY;
 
-    update();
+    updateScreen();
     await sleep(speed);
 }
 
-function update() {
+function updateScreen() {
     $("#game-area").empty();
 
     for (let r = 0; r < CELL_NUM; r++) {
         for (let c = 0; c < CELL_NUM; c++) {
-            let div = $("<div id=cell" + r + c + "></div>");
+            if (isSolved && puzzle[r][c].state !== CELL_STATES.FIXED)
+                puzzle[r][c].state = CELL_STATES.FINAL;
+
+            let div = $("<div id=" + r + c + "></div>");
             div.addClass("cell");
             div.text(puzzle[r][c].value === 0 ? "" : puzzle[r][c].value);
             div.css("background-color", puzzle[r][c].color);
@@ -178,7 +183,6 @@ function hasEmptyCell() {
             if (puzzle[r][c].value === EMPTYVALUE) return true;
         }
     }
-
     return false;
 }
 
