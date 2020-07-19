@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudoku</title>
-    <link href="css/style.css" rel="stylesheet">
-    <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
-    <script src="js/solveSudoku.js" type="text/javascript"></script>
-</head>
-<body>
-    <div id="game-area"></div>
-    <div id="controls-area">
-        <button id="btnSolve">Solve</button>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sudoku</title>
+        <link href="css/style.css" rel="stylesheet" />
+        <script src="js/lib/jquery-3.5.1.js" defer></script>
+        <script src="js/generateSudoku.js" defer></script>
+        <script src="js/solveSudoku.js" defer></script>
+        <script src="js/main.js" defer></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="game-area" class="py20"></div>
+
+            <div id="controls-area">
+                <div id="controls-main" class="py20">
+                    <input type="range" id="speed" min="1" max="100" />
+                    <button id="btnSolve">Solve</button>
+                </div>
+                <div class="controls-number" class="py20">
+                    <button id="btn1" class="btnNumber" data-number="1">1</button>
+                    <button id="btn2" class="btnNumber" data-number="2">2</button>
+                    <button id="btn3" class="btnNumber" data-number="3">3</button>
+                    <button id="btn4" class="btnNumber" data-number="4">4</button>
+                    <button id="btn5" class="btnNumber" data-number="5">5</button>
+                    <button id="btn6" class="btnNumber" data-number="6">6</button>
+                    <button id="btn7" class="btnNumber" data-number="7">7</button>
+                    <button id="btn8" class="btnNumber" data-number="8">8</button>
+                    <button id="btn9" class="btnNumber" data-number="9">9</button>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
