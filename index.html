@@ -12,23 +12,27 @@
     </head>
     <body>
         <div id="wrapper">
-            <div id="game-area" class="py20"></div>
+            <div id="game-area" class="py15"></div>
 
             <div id="controls-area">
-                <div id="controls-main" class="py20">
-                    <input type="range" id="speed" min="1" max="100" />
-                    <button id="btnSolve">Solve</button>
+                <div id="controls-main" class="py15">
+                    <div>
+                        <label for="speed">Speed: </label
+                        ><input type="range" id="speed" min="10" max="1000" value="10" step="10" /><span id="speedValue">10</span>
+                    </div>
+                    <button id="btnSolve" class="btnMain">Solve</button>
+                    <button id="btnErase" class="btnMain">Erase</button>
                 </div>
-                <div class="controls-number" class="py20">
-                    <button id="btn1" class="btnNumber" data-number="1">1</button>
-                    <button id="btn2" class="btnNumber" data-number="2">2</button>
-                    <button id="btn3" class="btnNumber" data-number="3">3</button>
-                    <button id="btn4" class="btnNumber" data-number="4">4</button>
-                    <button id="btn5" class="btnNumber" data-number="5">5</button>
-                    <button id="btn6" class="btnNumber" data-number="6">6</button>
-                    <button id="btn7" class="btnNumber" data-number="7">7</button>
-                    <button id="btn8" class="btnNumber" data-number="8">8</button>
-                    <button id="btn9" class="btnNumber" data-number="9">9</button>
+                <div class="controls-number" class="py15">
+                    <button class="btnNumber" data-number="1">1</button>
+                    <button class="btnNumber" data-number="2">2</button>
+                    <button class="btnNumber" data-number="3">3</button>
+                    <button class="btnNumber" data-number="4">4</button>
+                    <button class="btnNumber" data-number="5">5</button>
+                    <button class="btnNumber" data-number="6">6</button>
+                    <button class="btnNumber" data-number="7">7</button>
+                    <button class="btnNumber" data-number="8">8</button>
+                    <button class="btnNumber" data-number="9">9</button>
                 </div>
             </div>
         </div>

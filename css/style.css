@@ -47,18 +47,18 @@ body {
 }
 
 .selected {
-    background: #00d3da;
-    box-shadow: 5px 5px 18px #008f94, -5px -5px 18px #00ffff;
+    background: #78def7;
+    box-shadow: 5px 5px 18px #4c8c9c, -5px -5px 18px #a4ffff;
 }
 
 .highlight-area {
-    border: 1px #0776ba solid;
+    border: 1.5px #0776ba solid;
 }
 
 .highlight-duplicate {
-    border: 1px #ba6707 solid;
+    border: 2px #eb772a solid;
 }
 
-.py20 {
-    padding: 20px 0;
+.py15 {
+    padding: 15px 0;
 }

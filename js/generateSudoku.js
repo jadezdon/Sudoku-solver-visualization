@@ -16,7 +16,6 @@ const CELL_NUM = 9;
 const EMPTYVALUE = 0;
 const CELL_SIZE = 70;
 
-let speed = 5;
 let isSolved = false;
 let puzzle = [...Array(CELL_NUM)].map((x) => Array(CELL_NUM));
 

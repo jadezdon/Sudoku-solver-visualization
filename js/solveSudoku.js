@@ -1,4 +1,5 @@
 let solveVisualization = false;
+let speed = 10;
 
 async function solveSudoku() {
     let row, col;
