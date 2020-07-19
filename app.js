@@ -8,3 +8,5 @@ app.get("/", function (req, res) {
 });
 
 app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+
+app.use(express.static(__dirname + "/public"));
