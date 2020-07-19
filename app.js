@@ -4,9 +4,9 @@ const path = require("path");
 const port = process.env.PORT || 3000;
 
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname + "/index.html"));
+    res.sendFile(path.join(__dirname + "/templates/index.html"));
 });
 
-app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 
-app.use(express.static(__dirname + "/"));
+app.use(express.static(__dirname + "/public/"));

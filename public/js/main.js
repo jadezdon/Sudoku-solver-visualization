@@ -80,7 +80,7 @@ $(function () {
 
     $("input[type=range]").on("input", function () {
         // console.log($(this).val());
-        speed = $(this).val();
+        speed = 1000 - $(this).val();
         $("#speedValue").text($(this).val());
     });
 

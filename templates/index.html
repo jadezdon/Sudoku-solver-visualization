@@ -12,18 +12,19 @@
     </head>
     <body>
         <div id="wrapper">
-            <div id="game-area" class="py15"></div>
+            <div id="game-area" class="py-regular"></div>
 
-            <div id="controls-area">
-                <div id="controls-main" class="py15">
-                    <div>
-                        <label for="speed">Speed: </label
-                        ><input type="range" id="speed" min="10" max="1000" value="10" step="10" /><span id="speedValue">10</span>
-                    </div>
+            <div id="controls-area" class="py-regular">
+                <div id="controls-visualization" class="py-small">
+                    <label for="speed">Speed: </label><span id="speedValue">10</span>
+                    <input type="range" id="speed" min="10" max="1000" value="10" step="10" class="slider" />
+                    
                     <button id="btnSolve" class="btnMain">Solve</button>
+                </div>
+                <div id="controls-main" class="py-small">
                     <button id="btnErase" class="btnMain">Erase</button>
                 </div>
-                <div class="controls-number" class="py15">
+                <div class="controls-number" class="py-small">
                     <button class="btnNumber" data-number="1">1</button>
                     <button class="btnNumber" data-number="2">2</button>
                     <button class="btnNumber" data-number="3">3</button>
