@@ -1,0 +1,19 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "Sudoku solver visualization using jQuery (backtracking algorithm)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhpeipei/Sudoku.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhpeipei/Sudoku/issues"
+  },
+  "homepage": "https://github.com/zhpeipei/Sudoku#readme"
+}
