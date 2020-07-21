@@ -1,8 +1,22 @@
 let selectedRowIndex = -1,
     selectedColIndex = -1;
 
+function initSudoku() {
+    for (let r = 0; r < CELL_NUM; r++) {
+        for (let c = 0; c < CELL_NUM; c++) {
+            let div = $("<div id=" + r + c + "></div>");
+            div.addClass("cell");
+            div.addClass(puzzle[r][c].state.toLowerCase());
+            div.text(puzzle[r][c].value === 0 ? "" : puzzle[r][c].value);
+            div.data("row", r).data("col", c);
+            $("#game-area").append(div);
+        }
+    }
+}
+
 function highlight() {
     $("div").removeClass("highlight-area highlight-duplicate");
+
     for (let row = 0; row < CELL_NUM; row++) {
         $("#" + row + selectedColIndex).addClass("highlight-area");
 
@@ -46,15 +60,14 @@ function highlight() {
 }
 
 $(function () {
-    init();
+    generateSudoku(1);
+    initSudoku();
 
-    $(".cell").click(function () {
-        // console.log($(this).data());
-
+    $(".cell").click(function (e) {
         let row = $(this).data().row,
             col = $(this).data().col;
         if (puzzle[row][col].state !== CELL_STATES.FIXED) {
-            //* deselect previouse cell
+            //* deselect previous cell
             if (selectedRowIndex !== -1 && selectedColIndex !== -1) {
                 puzzle[selectedRowIndex][selectedColIndex].state =
                     puzzle[selectedRowIndex][selectedColIndex].value === EMPTYVALUE
@@ -76,23 +89,35 @@ $(function () {
                 .addClass(puzzle[selectedRowIndex][selectedColIndex].state.toLowerCase());
             highlight();
         }
+        // e.preventDefault();
     });
 
-    $("input[type=range]").on("input", function () {
-        // console.log($(this).val());
-        speed = 1000 - $(this).val();
-        $("#speedValue").text($(this).val());
+    $("#inputDelay").on("input", function () {
+        delay = $(this).val();
+        $("#delayValue").text("" + $(this).val() + " ms");
     });
 
-    $("#btnSolve").click(async function () {
+    $("#btnSolve").click(async function (e) {
         $("input").prop("disabled", true);
         $("button").prop("disabled", true);
-        init();
+        initSudoku();
 
         solveVisualization = true;
-        await solveSudoku();
-        $("input").prop("disabled", false);
-        $("button").prop("disabled", false);
+        await solveSudokuVisu();
+
+        $("#btnNew").prop("disabled", false);
+        // e.preventDefault();
+    });
+
+    $("#btnNew").click(function (e) {
+        // $("#game-area").empty();
+        // generateSudoku(3);
+        // initSudoku();
+
+        // $("input").prop("disabled", false);
+        // $("button").prop("disabled", false);
+        // e.preventDefault();
+        location.reload();
     });
 
     $("#btnErase").click(function () {
@@ -106,7 +131,6 @@ $(function () {
     $(".btnNumber").click(function () {
         if (selectedRowIndex !== -1 && selectedColIndex !== -1) {
             puzzle[selectedRowIndex][selectedColIndex].value = $(this).data().number;
-            // puzzle[selectedRowIndex][selectedColIndex].state = CELL_STATES.FILLED;
 
             $("#" + selectedRowIndex + selectedColIndex).text(puzzle[selectedRowIndex][selectedColIndex].value);
             $("#" + selectedRowIndex + selectedColIndex)
@@ -115,9 +139,6 @@ $(function () {
                 .addClass(puzzle[selectedRowIndex][selectedColIndex].state.toLowerCase());
 
             highlight();
-
-            // selectedRowIndex = -1;
-            // selectedColIndex = -1;
         }
     });
 });

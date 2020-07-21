@@ -6,8 +6,8 @@
         <title>Sudoku</title>
         <link href="css/style.css" rel="stylesheet" />
         <script src="js/lib/jquery-3.5.1.js" defer></script>
-        <script src="js/generateSudoku.js" defer></script>
-        <script src="js/solveSudoku.js" defer></script>
+        <script src="js/sudokuGenerator.js" defer></script>
+        <script src="js/sudokuSolver.js" defer></script>
         <script src="js/main.js" defer></script>
     </head>
     <body>
@@ -16,12 +16,13 @@
 
             <div id="controls-area" class="py-regular">
                 <div id="controls-visualization" class="py-small">
-                    <label for="speed">Speed: </label><span id="speedValue">10</span>
-                    <input type="range" id="speed" min="10" max="1000" value="10" step="10" class="slider" />
+                    <label for="inputDelay">Delay: </label><span id="delayValue">10 ms</span>
+                    <input type="range" id="inputDelay" min="10" max="1000" value="10" step="10" class="slider" />
                     
                     <button id="btnSolve" class="btnMain">Solve</button>
                 </div>
                 <div id="controls-main" class="py-small">
+                    <button id="btnNew" class="btnMain">New</button>
                     <button id="btnErase" class="btnMain">Erase</button>
                 </div>
                 <div class="controls-number" class="py-small">
