@@ -1,6 +1,10 @@
 body {
-    text-align: center;
     background-color: #d5d8dc;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: table;
 }
 
 button:hover {
@@ -8,7 +12,10 @@ button:hover {
 }
 
 #wrapper {
-    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #game-area {
@@ -16,6 +23,7 @@ button:hover {
     grid-template-columns: repeat(9, 55px);
     grid-template-rows: repeat(9, 55px);
     gap: 15px 15px;
+    justify-content: center
 }
 
 .cell {
@@ -71,8 +79,25 @@ button:hover {
     padding: 10px 0;
 }
 
-#controls-visualization {
+.my-small {
+    margin: 10px 0;
+}
+
+#controls-area {
     width: 50%;
+    margin: 0 auto;
+}
+
+#controls-number {
+    text-align: center;
+    width: 100%;
+    height: 80px;
+    margin: 0 auto;
+}
+
+#controls-main {
+    text-align: center;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -114,12 +139,6 @@ button:hover {
     cursor: pointer;
 }
 
-#controls-number {
-    text-align: center;
-    width: 100%;
-    height: 80px;
-}
-
 .btnNumber {
     width: 40px;
     height: 40px;
@@ -137,5 +156,49 @@ button:hover {
 }
 
 .btnNumber:disabled {
+    opacity: 0.5;
+}
+
+.btnMain {
+    background-color: white;
+    color: black;
+    transition-duration: 0.4s;
+    width: 70px;
+    height: 50px;
+    margin: 0 10px;
+}
+
+#btnSolve {
+    border: 2px solid #08920d;
+}
+
+#btnSolve:hover {
+    background-color: #08920d;
+    color: white;
+}
+
+#btnNew {
+    border: 2px solid #229bca;
+}
+
+#btnNew:hover {
+    background-color: #229bca;
+    color: white;
+}
+
+#btnNew:disabled {
+    opacity: 0.5;
+}
+
+#btnErase {
+    border: 2px solid #ff5233;
+}
+
+#btnErase:hover {
+    background-color: #ff5233;
+    color: white;
+}
+
+#btnErase:disabled {
     opacity: 0.5;
 }
